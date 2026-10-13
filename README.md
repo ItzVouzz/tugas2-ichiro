@@ -3,7 +3,7 @@
 |    NRP     |           Nama             | Bagian             |
 | :--------: |       :------------:       | :----------------: |
 | 5025261149 | Fathir Kusuma Agung W.     | Miru               |
-| ---------- | ------------------------   | Navigator          |
+| 5053261013 | Keijiro Majesta Arthawan   | Navigator          |
 
 # Tugas ROS2 - Reli Miru
 
