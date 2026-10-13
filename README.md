@@ -2,7 +2,7 @@
 
 |    NRP     |           Nama             | Bagian             |
 | :--------: |       :------------:       | :----------------: |
-| ---------- | ------------------------   | Miru               |
+| 5025261149 | Fathir Kusuma Agung W.     | Miru               |
 | ---------- | ------------------------   | Navigator          |
 
 # Tugas ROS2 - Reli Miru
@@ -214,12 +214,29 @@ Penggunaan AI: (sebutkan bagian mana yang dibantu AI, atau tulis "tidak ada")
 ## A. Setup Workspace
 
 ### Langkah-langkah
-Jelaskan langkah-langkah yang dilakukan.
+```
+source /opt/ros/jazzy/setup.bash
+colcon build --symlink-install
+source install/setup.bash
+
+export RCUTILS_CONSOLE_OUTPUT_FORMAT='[{name}] {message}'   # di setiap terminal
+
+# terminal 1
+ros2 run turtlesim turtlesim_node
+# terminal 2
+ros2 run rally_wasit wasit --ros-args -p seed:=7
+# terminal 3
+ros2 run rally_navigator navigator
+# terminal 4
+ros2 run rally_miru miru
+```
 
 -
 
 ### Screenshot
 Masukkan screenshot hasil eksekusi program atau proses yang relevan.
+
+![alt text](https://github.com/ItzVouzz/tugas2-ichiro/blob/main/Task-1.png?raw=true)
 
 # Task 2 - Miru
 
