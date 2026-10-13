@@ -234,8 +234,6 @@ ros2 run rally_miru miru
 -
 
 ### Screenshot
-Masukkan screenshot hasil eksekusi program atau proses yang relevan.
-
 ![alt text](https://github.com/ItzVouzz/tugas2-ichiro/blob/main/Task-1.png?raw=true)
 
 # Task 2 - Miru
