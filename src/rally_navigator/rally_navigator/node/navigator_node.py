@@ -51,7 +51,9 @@ class NavigatorNode:
             self.node.get_logger().error("Peta Rusak")
             return
 
-        self.grid = GridMap(msg)
+        start_cell = Cell(msg.start_col, msg.start_row)
+        finish_cell = Cell(msg.finish_col, msg.finish_row)
+        self.grid = GridMap(msg.width, msg.height, msg.rocks, start_cell, finish_cell)
         rocks_total = sum(msg.rocks)
         self.node.get_logger().info(
             f'peta diterima: {msg.width}x{msg.height}, {rocks_total} batu, start ({msg.start_col}, {msg.start_row}), finis ({msg.finish_col}, {msg.finish_row})'

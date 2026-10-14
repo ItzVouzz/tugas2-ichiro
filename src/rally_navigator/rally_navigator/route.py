@@ -29,6 +29,18 @@ def find_route(grid):
     parent = {grid.start: None}
     pending = deque([grid.start])
     # ... tulis pencariannya di sini ...
+    while pending:
+        current = pending.popleft()
+        
+        if(current == grid.finish):
+            break
+        
+        for i in range(DIRECTION_COUNT):
+            neighbor = Cell(current.col + DIRECTION_COL[i], current.row + DIRECTION_ROW[i])
+            
+            if(grid.inside(neighbor) and not grid.is_rock(neighbor) and neighbor not in parent):
+                parent[neighbor] = current
+                pending.append(neighbor)
 
     return trace_back(parent, grid.finish)
 
