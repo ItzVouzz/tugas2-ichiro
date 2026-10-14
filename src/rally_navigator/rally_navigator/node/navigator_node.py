@@ -29,6 +29,9 @@ class NavigatorNode:
         self.sent_count = 0
 
         # TODO: TASK A - Subscribe ke MAP_TOPIC callback on_map dengan QoS transient_local dan reliable
+        map_qos = QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL, reliability=ReliabilityPolicy.RELIABLE)
+        
+        self.map_subscriber = self.node.create_subscription(RaceMap, MAP_TOPIC, self.on_map, map_qos)
 
         # TODO: TASK E - Buat publisher untuk INSTRUCTION_TOPIC dan subscriber untuk STATUS_TOPIC callback on_status
         self.instruction_publisher = None
@@ -41,7 +44,19 @@ class NavigatorNode:
     def on_map(self, msg):
         # Abaikan jika peta sudah ada, atau jika jumlah batunya tidak cocok dengan width*height, tampilkan log error.
         # Jika aman, simpan sebagai GridMap di self.grid, tampilkan log peta diterima, lalu panggil self.plan_route().
-        pass
+        if(self.grid is not None):
+            return
+        
+        if(len(msg.rocks) != (msg.width * msg.height)):
+            self.node.get_logger().error("Peta Rusak")
+            return
+
+        self.grid = GridMap(msg)
+        rocks_total = sum(msg.rocks)
+        self.node.get_logger().info(
+            f'peta diterima: {msg.width}x{msg.height}, {rocks_total} batu, start ({msg.start_col}, {msg.start_row}), finis ({msg.finish_col}, {msg.finish_row})'
+        )
+        self.plan_route()
 
     # Provided, do not modify
     def plan_route(self):
