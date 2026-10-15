@@ -47,7 +47,21 @@ def find_route(grid):
 # TODO: TASK C
 def route_to_directions(route):
     # Ubah rute (daftar kotak) jadi daftar arah tiap langkah: 0 timur, 1 utara, 2 barat, 3 selatan.
-    return []
+    directions = []
+    
+    for i in range(len(route) - 1):
+        current_cell = route[i]
+        next_cell = route[i+1]
+        
+        diff_col = next_cell.col - current_cell.col
+        diff_row = next_cell.row - current_cell.row
+        
+        for direction_index in range(DIRECTION_COUNT):
+            if(diff_col == DIRECTION_COL[direction_index] and diff_row == DIRECTION_ROW[direction_index]):
+                directions.append(direction_index)
+                break
+        
+    return directions
 
 # TODO: TASK D
 def directions_to_instructions(directions):
