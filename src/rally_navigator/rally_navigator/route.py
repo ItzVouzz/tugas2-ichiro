@@ -70,7 +70,55 @@ def directions_to_instructions(directions):
     # - Jika langkah pertama bukan ke timur, Miru harus belok dulu (instruksi pertama jaraknya 0).
     # - Putar balik ditulis dua belok kiri berturut-turut. 
     # - Instruksi terakhir tidak punya belokan (TURN_NONE).
-    return []
+    if not directions:
+        return [Instruction(id=1, distance=0, turn=Instruction.TURN_NONE)]
+    
+    instructions = []
+    
+    current_facing = EAST
+    current_distance = 0
+    instruction_id = 1
+    
+    for step_direction in directions:
+        if(step_direction == current_facing):
+            current_distance += 1
+        else:
+            diff = (step_direction - current_facing) % DIRECTION_COUNT
+            
+            if(diff == 1):
+                turn = Instruction.TURN_LEFT
+            elif(diff == 3):
+                turn = Instruction.TURN_RIGHT
+            elif(diff == 2):
+                instructions.append(Instruction(
+                    id=instruction_id,
+                    distance=current_distance,
+                    turn=Instruction.TURN_LEFT
+                ))
+                instruction_id += 1
+                
+                current_distance = 0
+                turn = Instruction.TURN_LEFT
+                current_facing = step_direction
+            
+            instructions.append(Instruction(
+                id=instruction_id,
+                distance=current_distance,
+                turn=turn
+            ))
+            
+            instruction_id += 1
+            current_distance = 1
+            current_facing = step_direction
+
+    instructions.append(Instruction(
+        id=instruction_id,
+        distance=current_distance,
+        turn=Instruction.TURN_NONE
+    ))
+    
+    return instructions
+        
 
 # Provided, do not modify
 def route_to_instructions(route):
