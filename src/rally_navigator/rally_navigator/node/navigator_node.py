@@ -34,7 +34,8 @@ class NavigatorNode:
         self.map_subscriber = self.node.create_subscription(RaceMap, MAP_TOPIC, self.on_map, map_qos)
 
         # TODO: TASK E - Buat publisher untuk INSTRUCTION_TOPIC dan subscriber untuk STATUS_TOPIC callback on_status
-        self.instruction_publisher = None
+        self.instruction_publisher = self.node.create_publisher(Instruction, INSTRUCTION_TOPIC, 10)
+        self.status_subscriber = self.node.create_subscription(DriverStatus, STATUS_TOPIC, self.on_status, 10)
 
         # TODO: TASK F - Daftarkan parameter INSTRUCTIONS_AHEAD_PARAM bawaan DEFAULT_INSTRUCTIONS_AHEAD dengan on_parameter_change.
 
@@ -74,12 +75,26 @@ class NavigatorNode:
     # TODO: TASK E
     def on_status(self, msg):
         # Simpan laporan di self.last_status, lalu panggil self.send_instructions().
-        pass
+        self.last_status = msg
+        self.send_instructions()
 
     def send_instructions(self):
         # Kirim instruksi mulai dari self.sent_count sampai done_id + DEFAULT_INSTRUCTIONS_AHEAD log tiap pengiriman
         # Jangan kirim jika rute belum ada, Miru belum lapor, atau belum ada subscriber (get_subscription_count() masih 0)
-        pass
+        if(not self.instructions or self.last_status is None or self.instruction_publisher.get_subscription_count() == 0):
+            return
+        
+        target_id_max = self.last_status.done_id + DEFAULT_INSTRUCTIONS_AHEAD
+        total_instructions = len(self.instructions)
+        
+        while(self.sent_count < total_instructions and self.sent_count < target_id_max):
+            instruction = self.instructions[self.sent_count]
+            self.instruction_publisher.publish(instruction)
+            
+            turn_str = TURN_NAMES.get(instruction.turn, 'finish')
+            self.node.get_logger().info(f'[navigator] kirim instruksi {instruction.id}: maju {instruction.distance}, {turn_str}')
+            
+            self.sent_count += 1
 
     # TODO: TASK F
     def on_parameter_change(self, parameters):
