@@ -38,6 +38,8 @@ class NavigatorNode:
         self.status_subscriber = self.node.create_subscription(DriverStatus, STATUS_TOPIC, self.on_status, 10)
 
         # TODO: TASK F - Daftarkan parameter INSTRUCTIONS_AHEAD_PARAM bawaan DEFAULT_INSTRUCTIONS_AHEAD dengan on_parameter_change.
+        self.node.declare_parameter(INSTRUCTIONS_AHEAD_PARAM, DEFAULT_INSTRUCTIONS_AHEAD)
+        self.node.add_on_set_parameters_callback(self.on_parameter_change)
 
         self.node.get_logger().info('navigator siap')
 
@@ -84,7 +86,8 @@ class NavigatorNode:
         if(not self.instructions or self.last_status is None or self.instruction_publisher.get_subscription_count() == 0):
             return
         
-        target_id_max = self.last_status.done_id + DEFAULT_INSTRUCTIONS_AHEAD
+        instruction_ahead = self.node.get_parameter(INSTRUCTIONS_AHEAD_PARAM).value
+        target_id_max = self.last_status.done_id + instruction_ahead
         total_instructions = len(self.instructions)
         
         while(self.sent_count < total_instructions and self.sent_count < target_id_max):
@@ -99,4 +102,9 @@ class NavigatorNode:
     # TODO: TASK F
     def on_parameter_change(self, parameters):
         # Tolak instructions_ahead di luar MIN_INSTRUCTIONS_AHEAD sampai MAX_INSTRUCTIONS_AHEAD, selain itu terima.
+        for param in parameters:
+            if(param.name == INSTRUCTIONS_AHEAD_PARAM):
+                if(param.value < MIN_INSTRUCTIONS_AHEAD or param.value > MAX_INSTRUCTIONS_AHEAD):
+                    return SetParametersResult(successful=False)
+        
         return SetParametersResult(successful=True)
