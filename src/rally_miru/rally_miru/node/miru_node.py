@@ -67,6 +67,8 @@ class MiruNode:
         self.target_heading = 0.0
 
         # TODO: TASK A - Subscribe ke INSTRUCTION_TOPIC dengan callback on_instruction.
+        self.instruction_subscription = self.node.create_subscription(
+            Instruction, INSTRUCTION_TOPIC, self.on_instruction, 10)
 
         # TODO: TASK B - Buat publisher untuk CMD_VEL_TOPIC dan subscriber untuk POSE_TOPIC dengan callback on_pose.
         self.cmd_vel_publisher = None
@@ -86,7 +88,13 @@ class MiruNode:
         # Masukkan instruksi ke self.queue.
         # Jika diterima, tampilkan log 'instruksi N: maju D, <nama belokan>' (lihat TURN_NAMES). Jika
         # diabaikan, cukup log debug.
-        pass
+        def on_instruction(self, msg):
+            queued = QueuedInstruction(msg.id, msg.distance, msg.turn)
+            if self.queue.add(queued):
+                nama = TURN_NAMES.get(msg.turn)
+                self.node.get_logger().info(f'instruksi {msg.id}: maju {msg.distance}, {nama}')
+            else:
+                self.node.get_logger().debug(f'instruksi {msg.id} diabaikan')
 
     # TODO: TASK B
     def on_pose(self, msg):
