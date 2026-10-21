@@ -71,7 +71,9 @@ class MiruNode:
             Instruction, INSTRUCTION_TOPIC, self.on_instruction, 10)
 
         # TODO: TASK B - Buat publisher untuk CMD_VEL_TOPIC dan subscriber untuk POSE_TOPIC dengan callback on_pose.
-        self.cmd_vel_publisher = None
+        self.cmd_vel_publisher = self.node.create_publisher(Twist, CMD_VEL_TOPIC, 10)
+        self.pose_subscription = self.node.create_subscription(
+            Pose, POSE_TOPIC, self.on_pose, 10)
 
         # TODO: TASK C - Daftarkan parameter SPEED_PARAM dengan on_parameter_change,
         # lalu subscribe ke RACE_STATE_TOPIC dengan callback on_race_state.
@@ -99,11 +101,14 @@ class MiruNode:
     # TODO: TASK B
     def on_pose(self, msg):
         # Simpan pose terbaru di self.pose.
-        pass
+        self.pose = msg
 
     def publish_velocity(self, linear, angular):
         # Kirim satu Twist: linear.x untuk maju, angular.z untuk berputar.
-        pass
+        twist = Twist()
+        twist.linear.x = linear
+        twist.angular.z = angular
+        self.cmd_vel_publisher.publish(twist)
 
     # TODO: TASK C
     def on_race_state(self, msg):

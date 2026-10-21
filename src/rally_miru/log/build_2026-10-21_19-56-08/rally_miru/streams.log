@@ -1,0 +1,21 @@
+[1.694s] Invoking command in '/media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/rally_miru build --build-base /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/build install --record /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/install.log --install-scripts $base/lib/rally_miru --single-version-externally-managed install_data
+[2.241s] running egg_info
+[2.276s] writing build/rally_miru/rally_miru.egg-info/PKG-INFO
+[2.278s] writing dependency_links to build/rally_miru/rally_miru.egg-info/dependency_links.txt
+[2.278s] writing entry points to build/rally_miru/rally_miru.egg-info/entry_points.txt
+[2.279s] writing requirements to build/rally_miru/rally_miru.egg-info/requires.txt
+[2.279s] writing top-level names to build/rally_miru/rally_miru.egg-info/top_level.txt
+[2.354s] reading manifest file 'build/rally_miru/rally_miru.egg-info/SOURCES.txt'
+[2.356s] writing manifest file 'build/rally_miru/rally_miru.egg-info/SOURCES.txt'
+[2.356s] running build
+[2.357s] running build_py
+[2.357s] running install
+[2.370s] running install_lib
+[2.409s] running install_data
+[2.410s] running install_egg_info
+[2.449s] removing '/media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/python3.12/site-packages/rally_miru-0.0.0-py3.12.egg-info' (and everything under it)
+[2.450s] Copying build/rally_miru/rally_miru.egg-info to /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/python3.12/site-packages/rally_miru-0.0.0-py3.12.egg-info
+[2.452s] running install_scripts
+[2.905s] Installing miru script to /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/rally_miru
+[2.906s] writing list of installed files to '/media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/install.log'
+[3.013s] Invoked command in '/media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/rally_miru build --build-base /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/build install --record /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/install.log --install-scripts $base/lib/rally_miru --single-version-externally-managed install_data
