@@ -77,6 +77,10 @@ class MiruNode:
 
         # TODO: TASK C - Daftarkan parameter SPEED_PARAM dengan on_parameter_change,
         # lalu subscribe ke RACE_STATE_TOPIC dengan callback on_race_state.
+        self.node.declare_parameter(SPEED_PARAM, 1.0)
+        self.node.add_on_set_parameters_callback(self.on_parameter_change)
+        self.race_state_subscription = self.node.create_subscription(
+            RaceState, RACE_STATE_TOPIC, self.on_race_state, 10)
 
         # TODO: TASK F - Buat publisher untuk STATUS_TOPIC dan timer yang memanggil
         # publish_status tiap STATUS_PERIOD.
@@ -113,13 +117,16 @@ class MiruNode:
     # TODO: TASK C
     def on_race_state(self, msg):
         # Simpan status lomba terbaru di self.race_state.
-        pass
+        self.race_state = msg.state
 
     def get_speed(self):
         return self.node.get_parameter(SPEED_PARAM).value
 
     def on_parameter_change(self, parameters):
         # Tolak speed di luar MIN_SPEED sampai MAX_SPEED, selain itu terima.
+        for p in parameters:
+            if p.name == SPEED_PARAM and not (MIN_SPEED <= p.value <= MAX_SPEED):
+                return SetParametersResult(successful=False)
         return SetParametersResult(successful=True)
 
     # TODO: TASK D
