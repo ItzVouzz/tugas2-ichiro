@@ -123,3 +123,26 @@ def directions_to_instructions(directions):
 # Provided, do not modify
 def route_to_instructions(route):
     return directions_to_instructions(route_to_directions(route))
+
+def find_route_dfs(grid):
+    if(not grid.inside(grid.start) or not grid.inside(grid.finish)):
+        return []
+    
+    parent = {grid.start: None}
+    
+    stack = [grid.start]
+    
+    while(stack):
+        current = stack.pop()
+        
+        if(current == grid.finish):
+            break
+        
+        for i in range(DIRECTION_COUNT - 1, -1, -1):
+            neighbor = Cell(current.col + DIRECTION_COL[i], current.row + DIRECTION_ROW[i])
+            
+            if(grid.inside(neighbor) and not grid.is_rock(neighbor) and neighbor not in parent):
+                parent[neighbor] = current
+                stack.append(neighbor)
+    
+    return trace_back(parent, grid.finish)
