@@ -1,0 +1,25 @@
+running egg_info
+writing build/rally_miru/rally_miru.egg-info/PKG-INFO
+writing dependency_links to build/rally_miru/rally_miru.egg-info/dependency_links.txt
+writing entry points to build/rally_miru/rally_miru.egg-info/entry_points.txt
+writing requirements to build/rally_miru/rally_miru.egg-info/requires.txt
+writing top-level names to build/rally_miru/rally_miru.egg-info/top_level.txt
+reading manifest file 'build/rally_miru/rally_miru.egg-info/SOURCES.txt'
+writing manifest file 'build/rally_miru/rally_miru.egg-info/SOURCES.txt'
+running build
+running build_py
+copying rally_miru/motion.py -> /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/build/lib/rally_miru
+copying rally_miru/node/miru_node.py -> /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/build/lib/rally_miru/node
+running install
+running install_lib
+copying /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/build/lib/rally_miru/motion.py -> /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/python3.12/site-packages/rally_miru
+copying /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/build/lib/rally_miru/node/miru_node.py -> /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/python3.12/site-packages/rally_miru/node
+byte-compiling /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/python3.12/site-packages/rally_miru/motion.py to motion.cpython-312.pyc
+byte-compiling /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/python3.12/site-packages/rally_miru/node/miru_node.py to miru_node.cpython-312.pyc
+running install_data
+running install_egg_info
+removing '/media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/python3.12/site-packages/rally_miru-0.0.0-py3.12.egg-info' (and everything under it)
+Copying build/rally_miru/rally_miru.egg-info to /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/python3.12/site-packages/rally_miru-0.0.0-py3.12.egg-info
+running install_scripts
+Installing miru script to /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/rally_miru
+writing list of installed files to '/media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/install.log'
