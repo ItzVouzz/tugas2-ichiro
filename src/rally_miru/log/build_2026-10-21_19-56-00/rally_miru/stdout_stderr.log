@@ -1,0 +1,49 @@
+running egg_info
+creating build/rally_miru/rally_miru.egg-info
+writing build/rally_miru/rally_miru.egg-info/PKG-INFO
+writing dependency_links to build/rally_miru/rally_miru.egg-info/dependency_links.txt
+writing entry points to build/rally_miru/rally_miru.egg-info/entry_points.txt
+writing requirements to build/rally_miru/rally_miru.egg-info/requires.txt
+writing top-level names to build/rally_miru/rally_miru.egg-info/top_level.txt
+writing manifest file 'build/rally_miru/rally_miru.egg-info/SOURCES.txt'
+reading manifest file 'build/rally_miru/rally_miru.egg-info/SOURCES.txt'
+writing manifest file 'build/rally_miru/rally_miru.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/build
+creating /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/build/lib
+creating /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/build/lib/rally_miru
+copying rally_miru/instruction_queue.py -> /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/build/lib/rally_miru
+copying rally_miru/miru_main.py -> /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/build/lib/rally_miru
+copying rally_miru/motion.py -> /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/build/lib/rally_miru
+copying rally_miru/__init__.py -> /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/build/lib/rally_miru
+creating /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/build/lib/rally_miru/node
+copying rally_miru/node/miru_node.py -> /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/build/lib/rally_miru/node
+copying rally_miru/node/__init__.py -> /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/build/lib/rally_miru/node
+running install
+running install_lib
+creating /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/python3.12/site-packages/rally_miru
+copying /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/build/lib/rally_miru/instruction_queue.py -> /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/python3.12/site-packages/rally_miru
+copying /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/build/lib/rally_miru/miru_main.py -> /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/python3.12/site-packages/rally_miru
+copying /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/build/lib/rally_miru/motion.py -> /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/python3.12/site-packages/rally_miru
+creating /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/python3.12/site-packages/rally_miru/node
+copying /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/build/lib/rally_miru/node/miru_node.py -> /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/python3.12/site-packages/rally_miru/node
+copying /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/build/lib/rally_miru/node/__init__.py -> /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/python3.12/site-packages/rally_miru/node
+copying /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/build/lib/rally_miru/__init__.py -> /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/python3.12/site-packages/rally_miru
+byte-compiling /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/python3.12/site-packages/rally_miru/instruction_queue.py to instruction_queue.cpython-312.pyc
+byte-compiling /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/python3.12/site-packages/rally_miru/miru_main.py to miru_main.cpython-312.pyc
+byte-compiling /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/python3.12/site-packages/rally_miru/motion.py to motion.cpython-312.pyc
+byte-compiling /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/python3.12/site-packages/rally_miru/node/miru_node.py to miru_node.cpython-312.pyc
+byte-compiling /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/python3.12/site-packages/rally_miru/node/__init__.py to __init__.cpython-312.pyc
+byte-compiling /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/python3.12/site-packages/rally_miru/__init__.py to __init__.cpython-312.pyc
+running install_data
+creating /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/share/ament_index
+creating /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/share/ament_index/resource_index
+creating /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/share/ament_index/resource_index/packages
+copying resource/rally_miru -> /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/share/ament_index/resource_index/packages
+copying package.xml -> /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/share/rally_miru
+running install_egg_info
+Copying build/rally_miru/rally_miru.egg-info to /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/python3.12/site-packages/rally_miru-0.0.0-py3.12.egg-info
+running install_scripts
+Installing miru script to /media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/install/rally_miru/lib/rally_miru
+writing list of installed files to '/media/fathirwin/New Volume/Kuliah/TC/Ichiro Intern/KPP2/tugas2-ichiro/src/rally_miru/build/rally_miru/install.log'

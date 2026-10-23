@@ -1,0 +1,2 @@
+[console_scripts]
+miru = rally_miru.miru_main:main

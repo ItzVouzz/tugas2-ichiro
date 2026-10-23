@@ -10,6 +10,8 @@ from rally_miru.motion import (
 from rcl_interfaces.msg import SetParametersResult
 from turtlesim.msg import Pose
 
+import time
+
 UPDATE_PERIOD = 0.01  # [s]
 STATUS_PERIOD = 0.05  # [s] 20 Hz
 
@@ -22,6 +24,11 @@ INSTRUCTION_TOPIC = '/navigator/instruction'
 STATUS_TOPIC = '/miru/status'
 RACE_STATE_TOPIC = '/race/state'
 SPEED_PARAM = 'speed'
+
+#Task G
+USE_SLOWDOWN = True
+SLOWDOWN_MIN = 0.15 # [m/s]
+SLOWDOWN_CONS = 3.0 
 
 TURN_NAMES = {
     Instruction.TURN_NONE: 'finis',
@@ -66,17 +73,25 @@ class MiruNode:
         self.target_y = 0.0
         self.target_heading = 0.0
 
+        self.waktu_mulai = None
+
         # TODO: TASK A - Subscribe ke INSTRUCTION_TOPIC dengan callback on_instruction.
+        self.instruction_subscription = self.node.create_subscription(Instruction, INSTRUCTION_TOPIC, self.on_instruction, 10)
 
         # TODO: TASK B - Buat publisher untuk CMD_VEL_TOPIC dan subscriber untuk POSE_TOPIC dengan callback on_pose.
-        self.cmd_vel_publisher = None
+        self.cmd_vel_publisher = self.node.create_publisher(Twist, CMD_VEL_TOPIC, 10)
+        self.pose_subscription = self.node.create_subscription(Pose, POSE_TOPIC, self.on_pose, 10)
 
         # TODO: TASK C - Daftarkan parameter SPEED_PARAM dengan on_parameter_change,
         # lalu subscribe ke RACE_STATE_TOPIC dengan callback on_race_state.
+        self.node.declare_parameter(SPEED_PARAM, 1.0)
+        self.node.add_on_set_parameters_callback(self.on_parameter_change)
+        self.race_state_subscription = self.node.create_subscription(RaceState, RACE_STATE_TOPIC, self.on_race_state, 10)
 
         # TODO: TASK F - Buat publisher untuk STATUS_TOPIC dan timer yang memanggil
         # publish_status tiap STATUS_PERIOD.
-        self.status_publisher = None
+        self.status_publisher = self.node.create_publisher(DriverStatus, STATUS_TOPIC, 10)
+        self.status_timer = self.node.create_timer(STATUS_PERIOD, self.publish_status)
 
         self.timer = self.node.create_timer(UPDATE_PERIOD, self.update)
         self.node.get_logger().info('miru siap')
@@ -86,56 +101,106 @@ class MiruNode:
         # Masukkan instruksi ke self.queue.
         # Jika diterima, tampilkan log 'instruksi N: maju D, <nama belokan>' (lihat TURN_NAMES). Jika
         # diabaikan, cukup log debug.
-        pass
+        queued = QueuedInstruction(msg.id, msg.distance, msg.turn)
+        if self.queue.add(queued):
+            nama = TURN_NAMES.get(msg.turn)
+            self.node.get_logger().info(f'instruksi {msg.id}: maju {msg.distance}, {nama}')
+        else:
+            self.node.get_logger().debug(f'instruksi {msg.id} diabaikan')
 
     # TODO: TASK B
     def on_pose(self, msg):
         # Simpan pose terbaru di self.pose.
-        pass
+        self.pose = msg
 
     def publish_velocity(self, linear, angular):
         # Kirim satu Twist: linear.x untuk maju, angular.z untuk berputar.
-        pass
+        twist = Twist()
+        twist.linear.x = float(linear)
+        twist.angular.z = float(angular)
+        self.cmd_vel_publisher.publish(twist)
 
     # TODO: TASK C
     def on_race_state(self, msg):
         # Simpan status lomba terbaru di self.race_state.
-        pass
+        self.race_state = msg.state
 
     def get_speed(self):
         return self.node.get_parameter(SPEED_PARAM).value
 
     def on_parameter_change(self, parameters):
         # Tolak speed di luar MIN_SPEED sampai MAX_SPEED, selain itu terima.
+        for p in parameters:
+            if p.name == SPEED_PARAM and not (MIN_SPEED <= p.value <= MAX_SPEED):
+                return SetParametersResult(successful=False)
         return SetParametersResult(successful=True)
 
     # TODO: TASK D
     def start_drive(self, cells):
         # Hitung titik tujuan `cells` kotak di depan posisi RENCANA (planned_x, planned_y),
         # lalu simpan di self.target_x dan self.target_y.
-        pass
+        self.target_x, self.target_y = target_point(self.planned_x, self.planned_y, self.planned_heading, cells)
 
     def drive_step(self):
+        #if self.waktu_mulai == None:
+        #    self.waktu_mulai = time.time()
+
         # Jika sisa jarak ke target sudah 0 atau negatif, hentikan kura-kura dan return True.
         # Jika belum, maju dengan self.get_speed() dan return False.
-        return True
+        sisa = remaining_distance(self.pose.x, self.pose.y, self.pose.theta, self.target_x, self.target_y)
+        if sisa <= 0.00:
+            self.publish_velocity(0.0, 0.0)
+
+            #Debuggingg TASK G
+            #waktu_akhir = time.time()
+            #durasi = waktu_akhir - self.waktu_mulai
+            #print(f"\n[DATA EXPERIMEN] Berhenti! Waktu Tempuh: {durasi:.2f} detik\n")
+            #self.waktu_mulai = None # Reset untuk perintah berikutnya
+
+            return True
+
+        #TASK G: Ketika USE_SLOWDOWN = True maka speed yang diambil adalah speed terkecil dari
+        #speed saat ini dan sisa jarak * SLOWDOWN_CONSTANTA. dan agar membatasi dari miru
+        #berhenti di tengah-tengah, kecepatan terkecil dibatasi oleh SLOWDOWN_MINIMAL
+        speed = self.get_speed()
+        if USE_SLOWDOWN:
+            speed = min(speed, max(SLOWDOWN_MIN, sisa * SLOWDOWN_CONS))
+            #print(f"DEBUG SLOWDOWN -> Sisa: {sisa:.3f} | Speed dikirim: {speed:.3f}")
+        self.publish_velocity(speed, 0.0)
+        return False
 
     # TODO: TASK E
     def start_turn(self, turn):
         # Hitung arah tujuan setelah belok dari planned_heading, lalu simpan di self.target_heading.
-        pass
+        self.target_heading = turn_target(self.planned_heading, turn)
 
     def turn_step(self):
         # Hitung selisih self.target_heading dan self.pose.theta, lalu minta kecepatan putarnya ke turn_rate.
         # Jika sudah pas, hentikan kura-kura dan return True. Jika belum, putar dan return
         # False.
-        return True
+        selisih = self.target_heading - self.pose.theta
+        rate = turn_rate(selisih)
+        if rate == 0.0:
+            self.publish_velocity(0.0, 0.0)
+            return True
+        self.publish_velocity(0.0, rate)
+        return False
 
     # TODO: TASK F
     def publish_status(self):
         # Kirim satu DriverStatus berisi state, pose, current_id, done_id, dan jumlah antrean.
         # Jangan kirim jika pose pertama belum datang.
-        pass
+        if self.pose is None:
+            return
+        msg = DriverStatus()
+        msg.state = self.state.value
+        msg.x = self.pose.x
+        msg.y = self.pose.y
+        msg.theta = self.pose.theta
+        msg.current_id = self.current_id
+        msg.done_id = self.done_id
+        msg.queued = len(self.queue)
+        self.status_publisher.publish(msg)
 
     # Provided, do not modify
     def set_state(self, new_state):
@@ -212,3 +277,10 @@ class MiruNode:
         self.done_id = self.current_id
         self.node.get_logger().debug(f'instruksi {self.current_id} selesai')
         self.next_instruction()
+
+
+#Go Palsu
+#ros2 topic pub -r 5 /race/state rally_interfaces/msg/RaceState "{state: 2}"
+
+#Posisi Miru
+#ros2 topic echo --once /turtle1/pose
