@@ -205,7 +205,7 @@ Note : Di kerangka awal, wasit akan terus mencetak `menunggu miru...`, karena lo
 
 Tulis laporan di template berikut! Tidak perlu terlalu teknis sampai kode atau nama fungsi, cukup jelaskan dengan kalimat sendiri.
 
-Penggunaan AI: (sebutkan bagian mana yang dibantu AI, atau tulis "tidak ada")
+Penggunaan AI: Pada bagian navigator, AI digunakan untuk memberikan panduan pada pembentukan logika.
 
 ---
 
@@ -234,7 +234,7 @@ ros2 run rally_miru miru
 -
 
 ### Screenshot
-![alt text](images/task-1.png)
+![alt text](images/Task-1.png)
 
 # Task 2 - Miru
 
