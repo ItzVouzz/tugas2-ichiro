@@ -330,9 +330,9 @@ Masukkan screenshot hasil eksekusi program atau proses yang relevan.
 
 | Kecepatan | Galat lama | Waktu lama | Galat baru | Waktu baru |
 |---|---|---|---|---|
-| 0,5 m/s | ... m | ... s | ... m | ... s |
-| 1,0 m/s | ... m | ... s | ... m | ... s |
-| 2,5 m/s | ... m | ... s | ... m | ... s |
+| 0,5 m/s | 0.50404 m | 6.90 s | 0.47201 m | 7.23 s |
+| 1,0 m/s | 0.55204 m | 3.45 s | 0.47152 m | 3.98 s |
+| 2,5 m/s | 0.72004 m | 1.39 s | 0.47038 m | 2.12 s |
 
 ### Screenshot
 Masukkan screenshot hasil eksekusi program atau proses yang relevan, termasuk tabel hasil ukur.
