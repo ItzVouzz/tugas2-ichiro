@@ -1,6 +1,6 @@
 from rally_interfaces.msg import DriverStatus, Instruction, RaceMap
 from rally_navigator.grid import Cell, GridMap
-from rally_navigator.route import find_route, route_to_instructions
+from rally_navigator.route import find_route, route_to_instructions, find_route_dfs
 from rcl_interfaces.msg import SetParametersResult
 from rclpy.qos import DurabilityPolicy, QoSProfile, ReliabilityPolicy
 
