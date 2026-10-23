@@ -241,7 +241,10 @@ ros2 run rally_miru miru
 ## A. Antrean Instruksi
 
 ### Langkah-langkah
-Jelaskan langkah-langkah yang dilakukan.
+- Pada def `add` antrean dibuat dengan instruksi yang datang lebih dulu dijalankan lebih dulu(FIFO). Antrean menerima id instruksi paling besar. id akan dibandingkan dengan yang lama jika lebih kecil atau sama maka tidak diterima
+- Kemudian dibuat juga `pop` untuk mengambil antrean terlama, dan `__len__` untuk menghitung jumlah antrean
+- Di `miru_node`, subscribe ke topic `Instruction`. Setiap pesan yang masuk dimasukkan ke antrean dan masuk ke fungsi `on_instruction`. Jika diterima, dicatat di log. Jika diabaikan, hanya muncul di log debug.
+- Dites dengan mengirim instruksi id 1 dua kali lewat `ros2 topic pub`, dan lognya hanya muncul sekali. Tes `test_queue.py` juga dijalankan.
 
 -
 
@@ -251,7 +254,10 @@ Masukkan screenshot hasil eksekusi program atau proses yang relevan.
 ## B. Pose dan Perintah Gerak
 
 ### Langkah-langkah
-Jelaskan langkah-langkah yang dilakukan.
+- Buat publisher ke `/turtle1/cmd_vel` untuk menggerakkan kura-kura. Kecepatan maju dan kecepatan putar dikirim lewat satu pesan `Twist`.
+- Buat subscriber ke `/turtle1/pose`. Setiap pose baru disimpan sebagai pose terbaru, sehingga Miru selalu tahu posisi dan arah kura-kura.
+- Kemudian pose terbaru akan disimpan di `self.pose` melalui `on_pose` dan membuat `publish_velocity` untuk mengirim pergerakan ke kura-kura
+- Hasilnya dicek dengan `ros2 node info /miru`. Di situ muncul subscriber `/turtle1/pose` dan publisher `/turtle1/cmd_vel`.
 
 -
 
@@ -261,7 +267,10 @@ Masukkan screenshot hasil eksekusi program atau proses yang relevan.
 ## C. Aba-aba GO dan Parameter
 
 ### Langkah-langkah
-Jelaskan langkah-langkah yang dilakukan.
+- Parameter `speed` di inisiasi dengan nilai awal 1,0 m/s. dan bisa diubah di `on_parameter_change`. Setiap ada permintaan mengubah `speed`, nilainya akan diperiksa dulu. Jika di luar rentang 0,1 sampai 2,5, perubahan ditolak.
+- Miru subscribe ke `/race/state` dan menyimpan status lomba terbaru. Miru baru mulai menjalankan instruksi setelah statusnya `GO` yang akan disimpan di `on_race_state`.
+- Buat juga `get_speed` untuk mengambil parameter speed saat ini.
+- Dites dengan `ros2 param set /miru speed 3.0` (ditolak), `0.05` (ditolak), dan `2.5` (diterima).
 
 -
 
@@ -271,7 +280,11 @@ Masukkan screenshot hasil eksekusi program atau proses yang relevan.
 ## D. Maju
 
 ### Langkah-langkah
-Jelaskan langkah-langkah yang dilakukan.
+- Di `motion.py`, buat fungsi `target_point` untuk mencari tahu koordinat x,y dari perintah bergerak yang diberikan, dengan rumus: posisi + jumlah kotak × arah hadap.
+- Kemudian buat `remaining_distance` untuk melihat jarak yang tersisa setelah mendekati koordinat dan Nilainya positif jika tujuan masih di depan, dan nol atau negatif jika sudah sampai atau terlewat.
+- Di `miru_node.py` buat fungsi `start_drive` untuk menyimpan tujuan koordinat dari `target_point`.
+- Kemudian `drive_step`, kura-kura akan terus maju sambil jaraknya di cek dengan`remaining_distance`. jika nilai sisa jarak <= 0, maka kura-kura akan berhenti.
+- Dites dengan GO palsu dan instruksi maju 3. Kura-kura maju sekitar 3 m ke timur lalu berhenti, dan `test_forward.py` lulus.
 
 -
 
@@ -281,7 +294,11 @@ Masukkan screenshot hasil eksekusi program atau proses yang relevan.
 ## E. Belok
 
 ### Langkah-langkah
-Jelaskan langkah-langkah yang dilakukan.
+- Di `motion,py` hitung Arah tujuan di `turn_target`, belok kiri = + 90 derajat dan belok kanan = - 90 derajat (phi = 180, phi/2 = 90). Hasilnya dirapikan dengan `wrap_angle` supaya tetap di antara -phi dan phi.
+- Di `motion_node.py` buat fungsi `start_turn` untuk menyimpan nilai belok sesuai dengan `planned_heading`
+- Kemudian di `turn_step` hitung selisih antara arah tujuan dan arah sekarang. Selisih itu diberikan ke fungsi `turn_rate` untuk mendapat kecepatan putar.
+- Jika `turn_rate` bernilai 0 (selisih sudah cukup kecil), Miru berhenti dan belokan selesai, jika > 0 maka memanggil `publish_velocity` untuk berputar.
+- Dites dengan GO palsu, lalu belok kiri dan belok kanan. Nilai `theta` pada pose sekitar 1,57 setelah belok kiri dan sekitar 0 setelah belok kanan. `test_turn.py` lulus.
 
 -
 
@@ -291,7 +308,10 @@ Masukkan screenshot hasil eksekusi program atau proses yang relevan.
 ## F. Laporan Status
 
 ### Langkah-langkah
-Jelaskan langkah-langkah yang dilakukan.
+- Buat publisher ke `/miru/status` yang berisi `DriverStatus` dan timer yang memanggil fungsi laporan dari `STATUS_PERIOD` = 0,05 detik (20 kali per detik).
+- Setiap laporan berisi state Miru, posisi, arah, id instruksi yang sedang dijalankan, id instruksi terakhir yang selesai, dan jumlah instruksi di antrean.
+- Laporan tidak dikirim sebelum pose pertama dari turtlesim diterima, karena itu menggunakan if dan akan di return .. (kosong)
+- Dicek dengan `ros2 topic hz /miru/status` (sekitar 20 Hz) dan `ros2 topic echo /miru/status` untuk melihat isinya.
 
 -
 
@@ -301,9 +321,18 @@ Masukkan screenshot hasil eksekusi program atau proses yang relevan.
 ## G. Bonus: Berhenti Lebih Tepat
 
 ### Langkah-langkah
-Jelaskan langkah-langkah yang dilakukan.
+- Pertama buat `USE_SLOWDOWN` sebagai kondisi kapan memakai slowdown dan dieksekusi menggunakan if.
+- Buat `SLOWDOWN_MIN` sebagai batas kecepatan paling minimal yang harus dimiliki kura-kura agar tidak berhenti ditengah-tengah. Disini di inisialisasi dengan 0.15
+- Buat `SLOWDOWN_CONS` atau konstantan slowdown yang akan digunakan sebagai pengali dengan sisa jarak yang ada. Sehingga semakin kecil sisa jarak = semakain kecil kecepatannya hingga nanti dibatasi oleh `SLOWDOWN_MIN`.
+- Terakhir masukkan dalam `drive_step` dengan cara kerja, jika `USE_SLOWDOWN` = True maka speed yang digunakan adalah speed paling minimal dari `speed` dan `sisa(jarak) * SLOWDOWN_CONS`. Karena ada kemungkinan `sisa(jarak) * SLOWDOWN_CONS` bernilai sangat kecil, batasi dengan menggunakan fungsi max dengan `SLOWDOWN_MIN`.
 
 -
+
+| Kecepatan | Galat lama | Waktu lama | Galat baru | Waktu baru |
+|---|---|---|---|---|
+| 0,5 m/s | ... m | ... s | ... m | ... s |
+| 1,0 m/s | ... m | ... s | ... m | ... s |
+| 2,5 m/s | ... m | ... s | ... m | ... s |
 
 ### Screenshot
 Masukkan screenshot hasil eksekusi program atau proses yang relevan, termasuk tabel hasil ukur.

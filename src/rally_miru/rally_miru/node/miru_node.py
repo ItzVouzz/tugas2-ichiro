@@ -142,8 +142,8 @@ class MiruNode:
         self.target_x, self.target_y = target_point(self.planned_x, self.planned_y, self.planned_heading, cells)
 
     def drive_step(self):
-        if self.waktu_mulai == None:
-            self.waktu_mulai = time.time()
+        #if self.waktu_mulai == None:
+        #    self.waktu_mulai = time.time()
 
         # Jika sisa jarak ke target sudah 0 atau negatif, hentikan kura-kura dan return True.
         # Jika belum, maju dengan self.get_speed() dan return False.
@@ -154,7 +154,7 @@ class MiruNode:
             #Debuggingg TASK G
             #waktu_akhir = time.time()
             #durasi = waktu_akhir - self.waktu_mulai
-            #print(f"\n[DATA EXPERIMEN] Robot Berhenti! Waktu Tempuh: {durasi:.2f} detik\n")
+            #print(f"\n[DATA EXPERIMEN] Berhenti! Waktu Tempuh: {durasi:.2f} detik\n")
             #self.waktu_mulai = None # Reset untuk perintah berikutnya
 
             return True
