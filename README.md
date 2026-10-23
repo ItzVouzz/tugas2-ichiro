@@ -237,6 +237,11 @@ ros2 run rally_miru miru
 ![alt text](images/Task-1.png)
 
 # Task 2 - Miru
+### Penggunaan AI
+- Brainstorming
+- Membantu dalam kendala ketika pemilihan Variabel di ROS 2
+- Debugging
+- Dalam Konsep dasar dari Task G
 
 ## A. Antrean Instruksi
 
@@ -249,7 +254,9 @@ ros2 run rally_miru miru
 -
 
 ### Screenshot
-Masukkan screenshot hasil eksekusi program atau proses yang relevan.
+<img width="1366" height="768" alt="Task A" src="https://github.com/user-attachments/assets/457663a2-7c68-47ae-bb14-26f64fd76733" />
+<img width="1366" height="768" alt="Task A_2" src="https://github.com/user-attachments/assets/21b26a31-2b9c-4a86-9f86-2e4477064356" />
+
 
 ## B. Pose dan Perintah Gerak
 
@@ -262,7 +269,8 @@ Masukkan screenshot hasil eksekusi program atau proses yang relevan.
 -
 
 ### Screenshot
-Masukkan screenshot hasil eksekusi program atau proses yang relevan.
+<img width="1366" height="768" alt="Task B" src="https://github.com/user-attachments/assets/f0580f89-b5a3-44a9-a780-d4cc20099050" />
+
 
 ## C. Aba-aba GO dan Parameter
 
@@ -275,7 +283,8 @@ Masukkan screenshot hasil eksekusi program atau proses yang relevan.
 -
 
 ### Screenshot
-Masukkan screenshot hasil eksekusi program atau proses yang relevan.
+<img width="1366" height="768" alt="Task C" src="https://github.com/user-attachments/assets/ca1701d6-96cb-4e7d-ac50-c5d6355a2892" />
+
 
 ## D. Maju
 
@@ -289,7 +298,10 @@ Masukkan screenshot hasil eksekusi program atau proses yang relevan.
 -
 
 ### Screenshot
-Masukkan screenshot hasil eksekusi program atau proses yang relevan.
+<img width="1366" height="768" alt="Task D" src="https://github.com/user-attachments/assets/7bb337e3-7546-46cb-8a5e-743d6b86ef27" />
+<img width="680" height="314" alt="Task D_Test" src="https://github.com/user-attachments/assets/c4d77398-3918-4e6b-afba-6b116358d4b2" />
+<img width="1366" height="768" alt="Task D_Turtle" src="https://github.com/user-attachments/assets/faea4cda-792a-4cd7-9375-de51faa3232e" />
+
 
 ## E. Belok
 
@@ -303,7 +315,9 @@ Masukkan screenshot hasil eksekusi program atau proses yang relevan.
 -
 
 ### Screenshot
-Masukkan screenshot hasil eksekusi program atau proses yang relevan.
+<img width="1366" height="768" alt="Task E" src="https://github.com/user-attachments/assets/6132816d-6a14-4bd9-829d-f74e708fbcd9" />
+<img width="1366" height="768" alt="Task E_2" src="https://github.com/user-attachments/assets/1f949f3e-2661-4a6f-9bc0-67c930322e51" />
+<img width="680" height="295" alt="Task E_Test" src="https://github.com/user-attachments/assets/169f2523-5d9d-4bb6-a36c-645f007b6d62" />
 
 ## F. Laporan Status
 
@@ -316,7 +330,9 @@ Masukkan screenshot hasil eksekusi program atau proses yang relevan.
 -
 
 ### Screenshot
-Masukkan screenshot hasil eksekusi program atau proses yang relevan.
+<img width="1366" height="768" alt="Task F" src="https://github.com/user-attachments/assets/15223e58-2519-4d9a-a04c-091c92fd7978" />
+<img width="1366" height="768" alt="Task F_2" src="https://github.com/user-attachments/assets/a6925960-4d53-4b90-ac3b-c0c145aeef80" />
+
 
 ## G. Bonus: Berhenti Lebih Tepat
 
@@ -335,7 +351,12 @@ Masukkan screenshot hasil eksekusi program atau proses yang relevan.
 | 2,5 m/s | 0.72004 m | 1.39 s | 0.47038 m | 2.12 s |
 
 ### Screenshot
-Masukkan screenshot hasil eksekusi program atau proses yang relevan, termasuk tabel hasil ukur.
+<img width="1366" height="768" alt="Task G_F_0 5" src="https://github.com/user-attachments/assets/3fb88c43-3784-49e8-bb6c-5f419bd41ab8" />
+<img width="1366" height="768" alt="Task G_F_1 0" src="https://github.com/user-attachments/assets/9df84680-ab61-46eb-9e96-39dbbc58b86e" />
+<img width="1366" height="768" alt="Task G_F_2 5" src="https://github.com/user-attachments/assets/4defeee2-e102-4dc4-9f25-1df6e1fdcd41" />
+<img width="1366" height="768" alt="Task G_T_0 5" src="https://github.com/user-attachments/assets/6cc09a0f-9639-40d4-9213-5da0b659a0c9" />
+<img width="1366" height="768" alt="Task G_T_1 0" src="https://github.com/user-attachments/assets/b27e95a8-2f1c-45ce-8160-68aa947fe2b8" />
+<img width="1366" height="768" alt="Task G_T_2 5" src="https://github.com/user-attachments/assets/72a705e9-adc2-476c-afbe-3b363040d671" />
 
 # Task 3 - Navigator
 
