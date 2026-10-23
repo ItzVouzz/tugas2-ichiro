@@ -419,6 +419,7 @@ Algoritma BFS menjamin penemuan rute terpendek sehingga kura-kura menyelesaikan 
 
 ### Screenshot
 ![navigator_3g](images/navigator_3g.png)
-
-### Screenshot
-Masukkan screenshot hasil eksekusi program atau proses yang relevan, termasuk tabel hasil ukur.
+![navigator_3g](images/navigator_3g_bfs7.png)
+![navigator_3g](images/navigator_3g_bfs9.png)
+![navigator_3g](images/navigator_3g_dfs7.png)
+![navigator_3g](images/navigator_3g_dfs9.png)
