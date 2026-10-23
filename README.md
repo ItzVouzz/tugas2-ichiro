@@ -234,7 +234,7 @@ ros2 run rally_miru miru
 -
 
 ### Screenshot
-![alt text](https://github.com/ItzVouzz/tugas2-ichiro/blob/main/Task-1.png?raw=true)
+![alt text](images/task-1.png)
 
 # Task 2 - Miru
 
@@ -342,69 +342,83 @@ Masukkan screenshot hasil eksekusi program atau proses yang relevan, termasuk ta
 ## A. Menerima Peta
 
 ### Langkah-langkah
-Jelaskan langkah-langkah yang dilakukan.
-
--
+*   Menambahkan `QoSProfile` dengan jenis `TRANSIENT_LOCAL` dan `RELIABLE` pada *subscriber* peta agar pesan tidak hilang[cite: 2].
+*   Membuat validasi pada *callback* `on_map` untuk menolak peta jika ukuran *array* batu tidak sesuai dengan `width * height`[cite: 2].
+*   Menyimpan data pesan yang valid ke dalam objek `GridMap` dan memanggil fungsi pencarian rute[cite: 3].
 
 ### Screenshot
-Masukkan screenshot hasil eksekusi program atau proses yang relevan.
+![navigator_3a](images/navigator_3a.png)
 
 ## B. Mencari Rute
 
 ### Langkah-langkah
-Jelaskan langkah-langkah yang dilakukan.
-
--
+*   Mengimplementasikan algoritma *Breadth-First Search* (BFS) menggunakan objek `deque`[cite: 4].
+*   Melakukan iterasi pengecekan kotak tetangga dengan urutan prioritas: Timur, Utara, Barat, lalu Selatan[cite: 2].
+*   Mengabaikan kotak yang berada di luar batas peta atau berisi batu, lalu mencatat jalur pada *dictionary* `parent` hingga mencapai finis[cite: 4].
 
 ### Screenshot
-Masukkan screenshot hasil eksekusi program atau proses yang relevan.
+![navigator_3b](images/navigator_3b.png)
 
 ## C. Rute Menjadi Arah
 
 ### Langkah-langkah
-Jelaskan langkah-langkah yang dilakukan.
-
--
+*   Melakukan iterasi pada *list* kotak (*route*) yang dihasilkan dari fungsi BFS[cite: 2].
+*   Menghitung selisih koordinat (baris dan kolom) antara kotak saat ini dan kotak selanjutnya[cite: 13].
+*   Mencocokkan hasil selisih tersebut dengan konstanta arah untuk menghasilkan *list* berisi angka arah (0=Timur, 1=Utara, 2=Barat, 3=Selatan)[cite: 13].
 
 ### Screenshot
-Masukkan screenshot hasil eksekusi program atau proses yang relevan.
+![navigator_3c](images/navigator_3c.png)
 
 ## D. Arah Menjadi Instruksi
 
 ### Langkah-langkah
-Jelaskan langkah-langkah yang dilakukan.
-
--
+*   Mengonversi *list* angka arah menjadi pesan `Instruction` yang berisi jarak maju dan jenis belokan[cite: 2, 14].
+*   Menambahkan logika *modulo* untuk mendeteksi belokan, dengan penanganan khusus untuk kura-kura yang selalu mulai menghadap Timur[cite: 14].
+*   Memecah kondisi putar balik menjadi dua instruksi belok kiri, dan menutup instruksi paling akhir dengan `TURN_NONE`[cite: 2, 14].
 
 ### Screenshot
-Masukkan screenshot hasil eksekusi program atau proses yang relevan.
+![navigator_3d](images/navigator_3d.png)
 
 ## E. Mengirim Instruksi
 
 ### Langkah-langkah
-Jelaskan langkah-langkah yang dilakukan.
-
--
+*   Mendaftarkan *publisher* untuk topik instruksi dan *subscriber* untuk membaca laporan status dari Miru[cite: 16].
+*   Membuat pembatasan pengiriman instruksi (*looping*) berdasarkan ID instruksi yang sudah diselesaikan Miru (`done_id`) ditambah batas *ahead*[cite: 2, 16].
+*   Menambahkan validasi untuk memastikan instruksi baru dikirim jika jumlah *subscriber* lebih dari nol (Miru sudah menyala)[cite: 16].
 
 ### Screenshot
-Masukkan screenshot hasil eksekusi program atau proses yang relevan.
+![navigator_3e](images/navigator_3e.png)
 
 ## F. Parameter instructions_ahead
 
 ### Langkah-langkah
-Jelaskan langkah-langkah yang dilakukan.
-
--
+*   Mendaftarkan parameter `instructions_ahead` menggunakan `declare_parameter` agar nilai batas instruksi menjadi dinamis[cite: 17].
+*   Mengubah fungsi pengiriman instruksi agar mengambil nilai batas langsung dari parameter, bukan lagi dari konstanta statis[cite: 2, 17].
+*   Membuat *callback* validasi untuk menolak perubahan parameter jika nilainya berada di luar rentang 1 sampai 5[cite: 2, 17].
 
 ### Screenshot
-Masukkan screenshot hasil eksekusi program atau proses yang relevan.
+![navigator_3f](images/navigator_3f.png)
 
 ## G. Bonus: DFS lawan BFS
 
 ### Langkah-langkah
-Jelaskan langkah-langkah yang dilakukan.
+*   Membuat fungsi `find_route_dfs` menggunakan objek *List* sebagai tumpukan (*Stack* / LIFO)[cite: 2].
+*   Membalikkan urutan iterasi pengecekan arah (dari Selatan ke Timur) agar arah Timur diekstrak pertama kali dari *stack*.
+*   Membuat skrip Python terpisah untuk membandingkan perbedaan panjang rute dan jumlah kotak yang dikunjungi antara BFS dan DFS.
+*   Menjalankan perlombaan ROS 2 menggunakan rute BFS dan DFS secara bergantian untuk mencatat perbedaan waktu tempuhnya.
 
--
+### Hasil Analisis dan Tabel
+
+| Seed | Panjang BFS | Panjang DFS | Dikunjungi BFS | Dikunjungi DFS | Waktu BFS | Waktu DFS |
+|---|---|---|---|---|---|---|
+| 7 | 18 | 26 | 69 | 50 | 30.4 s | 52.2 s |
+| 9 | 20 | 22 | 57 | 44 | 34.6 s | 43.1 s |
+
+**Analisis:**
+Algoritma BFS menjamin penemuan rute terpendek sehingga kura-kura menyelesaikan lomba lebih cepat, namun mengorbankan memori karena mengevaluasi banyak kotak di peta. Sebaliknya, DFS memproses lebih sedikit kotak karena hanya fokus menelusuri satu cabang sedalam mungkin. Akibatnya, rute yang dihasilkan DFS cenderung jauh lebih panjang dan berputar-putar, yang berimbas pada waktu lomba yang jauh lebih lambat.
+
+### Screenshot
+![navigator_3g](images/navigator_3g.png)
 
 ### Screenshot
 Masukkan screenshot hasil eksekusi program atau proses yang relevan, termasuk tabel hasil ukur.
