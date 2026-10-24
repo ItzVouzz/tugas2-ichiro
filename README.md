@@ -232,7 +232,7 @@ ros2 run rally_miru miru
 -
 
 ### Screenshot
-![alt text](images/Task-1.png)
+![alt text](screenshots/Task-1.png)
 
 # Task 2 - Miru
 ### Penggunaan AI
@@ -369,7 +369,7 @@ ros2 run rally_miru miru
 *   Menyimpan data pesan yang valid ke dalam objek `GridMap` dan memanggil fungsi pencarian rute[cite: 3].
 
 ### Screenshot
-![navigator_3a](images/navigator_3a.png)
+![navigator_3a](screenshots/navigator_3a.png)
 
 ## B. Mencari Rute
 
@@ -379,7 +379,7 @@ ros2 run rally_miru miru
 *   Mengabaikan kotak yang berada di luar batas peta atau berisi batu, lalu mencatat jalur pada *dictionary* `parent` hingga mencapai finis[cite: 4].
 
 ### Screenshot
-![navigator_3b](images/navigator_3b.png)
+![navigator_3b](screenshots/navigator_3b.png)
 
 ## C. Rute Menjadi Arah
 
@@ -389,7 +389,7 @@ ros2 run rally_miru miru
 *   Mencocokkan hasil selisih tersebut dengan konstanta arah untuk menghasilkan *list* berisi angka arah (0=Timur, 1=Utara, 2=Barat, 3=Selatan)[cite: 13].
 
 ### Screenshot
-![navigator_3c](images/navigator_3c.png)
+![navigator_3c](screenshots/navigator_3c.png)
 
 ## D. Arah Menjadi Instruksi
 
@@ -399,7 +399,7 @@ ros2 run rally_miru miru
 *   Memecah kondisi putar balik menjadi dua instruksi belok kiri, dan menutup instruksi paling akhir dengan `TURN_NONE`[cite: 2, 14].
 
 ### Screenshot
-![navigator_3d](images/navigator_3d.png)
+![navigator_3d](screenshots/navigator_3d.png)
 
 ## E. Mengirim Instruksi
 
@@ -409,7 +409,7 @@ ros2 run rally_miru miru
 *   Menambahkan validasi untuk memastikan instruksi baru dikirim jika jumlah *subscriber* lebih dari nol (Miru sudah menyala)[cite: 16].
 
 ### Screenshot
-![navigator_3e](images/navigator_3e.png)
+![navigator_3e](screenshots/navigator_3e.png)
 
 ## F. Parameter instructions_ahead
 
@@ -419,7 +419,7 @@ ros2 run rally_miru miru
 *   Membuat *callback* validasi untuk menolak perubahan parameter jika nilainya berada di luar rentang 1 sampai 5[cite: 2, 17].
 
 ### Screenshot
-![navigator_3f](images/navigator_3f.png)
+![navigator_3f](screenshots/navigator_3f.png)
 
 ## G. Bonus: DFS lawan BFS
 
@@ -440,8 +440,8 @@ ros2 run rally_miru miru
 Algoritma BFS menjamin penemuan rute terpendek sehingga kura-kura menyelesaikan lomba lebih cepat, namun mengorbankan memori karena mengevaluasi banyak kotak di peta. Sebaliknya, DFS memproses lebih sedikit kotak karena hanya fokus menelusuri satu cabang sedalam mungkin. Akibatnya, rute yang dihasilkan DFS cenderung jauh lebih panjang dan berputar-putar, yang berimbas pada waktu lomba yang jauh lebih lambat.
 
 ### Screenshot
-![navigator_3g](images/navigator_3g.png)
-![navigator_3g](images/navigator_3g_bfs7.png)
-![navigator_3g](images/navigator_3g_bfs9.png)
-![navigator_3g](images/navigator_3g_dfs7.png)
-![navigator_3g](images/navigator_3g_dfs9.png)
+![navigator_3g](screenshots/navigator_3g.png)
+![navigator_3g](screenshots/navigator_3g_bfs7.png)
+![navigator_3g](screenshots/navigator_3g_bfs9.png)
+![navigator_3g](screenshots/navigator_3g_dfs7.png)
+![navigator_3g](screenshots/navigator_3g_dfs9.png)
