@@ -205,8 +205,6 @@ Note : Di kerangka awal, wasit akan terus mencetak `menunggu miru...`, karena lo
 
 Tulis laporan di template berikut! Tidak perlu terlalu teknis sampai kode atau nama fungsi, cukup jelaskan dengan kalimat sendiri.
 
-Penggunaan AI: Pada bagian navigator, AI digunakan untuk memberikan panduan pada pembentukan logika.
-
 ---
 
 # Task 1 - Persiapan dan Lomba
@@ -359,6 +357,9 @@ ros2 run rally_miru miru
 <img width="1366" height="768" alt="Task G_T_2 5" src="https://github.com/user-attachments/assets/72a705e9-adc2-476c-afbe-3b363040d671" />
 
 # Task 3 - Navigator
+### Penggunaan AI
+- Memberikan panduan pada pengerjaan logika navigator terutama di bagian pencarian rute dengan BFS dan DFS
+- Membantu dalam proses mengubah rute menjadi directions lalu menjadi insturctions
 
 ## A. Menerima Peta
 
